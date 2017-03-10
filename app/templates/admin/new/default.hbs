@@ -9,7 +9,7 @@
     <div class="panel-body">
       <form role="form">
         {{#each filteredColumns as |column|}}
-          <div class="model-column form-group"}}>
+          <div class="model-column {{column}} form-group">
             <label>
               {{column}}
               {{admin-input record=this columnValue=column class="form-control"}}
