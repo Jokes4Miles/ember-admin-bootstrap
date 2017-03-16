@@ -29,15 +29,13 @@ export default Ember.Component.extend({
       const scope = this;
       // recordType=relationship.type records=relationship.records relationshipName=relationship.name
       scope.get('store').findRecord(scope.get('relationship').type, scope.get('remove')).then((data) => {
-        Ember.Logger.log(data);
-        Ember.Logger.log(scope.get('model').get(scope.get('relationship').name).removeObject);
         if(scope.get('model').get(scope.get('relationship').name).removeObject) { // hasMany
           scope.get('model').get(scope.get('relationship').name).removeObject(data);
         }
         else { // belongsTo
           scope.get('model').set(scope.get('relationship').name, undefined);
         }
-        return scope.get('model').save(() => {
+        return scope.get('model').save().then(() => {
           Ember.Logger.log('Model Saved');
           Ember.$('.uid-input').val('');
         }, (error) => {
@@ -53,9 +51,8 @@ export default Ember.Component.extend({
     return this.get('model').get(this.get('relationship').name);
   }),
   modelKeys: Ember.computed('model', function() {
-    Ember.Logger.log(this.get('model'));
     if (typeof this.get('model').get(this.get('relationship').name) !== undefined && this.get('model').get(this.get('relationship').name).get('length') > 0)
-      return Ember.keys(this.get('model').get(this.get('relationship').name).objectAt(0).toJSON());
+      return Object.keys(this.get('model').get(this.get('relationship').name).objectAt(0).toJSON());
     return [];
   }),
   store: Ember.inject.service()
