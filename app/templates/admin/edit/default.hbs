@@ -38,7 +38,7 @@
       {{#each relationshipTypes as |relationshipType|}}
         {{#each relationshipType as |relationship|}}
           <h4>{{relationship.name}}</h4>
-          {{model-records-table recordType=relationship.type records=relationship.records relationshipName=relationship.inverse relationshipId=id}}
+          {{record-relationship-table relationshipType=relationshipType relationship=relationship relationshipId=id model=model}}
         {{/each}}
       {{/each}}
     </div>

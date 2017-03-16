@@ -1,0 +1,44 @@
+<div class="col-md-12">
+  <div class="{{recordType}} index panel panel-default">
+    <div class="panel-body">
+      <h6>Add Relationship</h6>
+      <p>Enter the uid of the model you would like to relate</p>
+      <div class="col-md-4 form-group">
+        {{input value=add enter='addRelationship' placeholder='UID' class='form-control uid-input'}}
+      </div>
+      <h6>Remove Relationship</h6>
+      <p>Enter the uid of the model you would like to remove</p>
+      <div class="col-md-4 form-group">
+        {{input value=remove enter='removeRelationship' placeholder='UID' class='form-control uid-input'}}
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>id</th>
+            {{#each modelKeys as |key|}}
+              <th>{{key}}</th>
+            {{/each}}
+          </tr>
+        </thead>
+
+        <tbody class="table-striped">
+          {{#each records as |record|}}
+            <tr>
+              <td>{{record.id}}</td>
+              {{#each modelKeys as |key|}}
+                <td>
+                  {{#link-to 'model-records.edit' recordType record}}
+                    {{get record key}}
+                  {{/link-to}}
+                </td>
+              {{/each}}
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{#unless records}}
+        No records!
+      {{/unless}}
+    </div>
+  </div>
+</div>
