@@ -14,7 +14,7 @@ export default Ember.Component.extend({
         else { // belongsTo
           scope.get('model').set(scope.get('relationship').name, data);
         }
-        return scope.get('model').save(() => {
+        return scope.get('model').save().then(() => {
           Ember.Logger.log('Model Saved');
           Ember.$('.uid-input').val('');
         }, (error) => {
