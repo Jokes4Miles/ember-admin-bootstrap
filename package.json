@@ -1,6 +1,6 @@
 {
   "name": "ember-admin-bootstrap",
-  "version": "0.0.4.1",
+  "version": "0.0.5",
   "directories": {
     "doc": "doc",
     "test": "tests"
