@@ -22,18 +22,31 @@
         </thead>
 
         <tbody class="table-striped">
-          {{#each records as |record|}}
+          {{#if isMultiple}}
+            {{#each records as |record|}}
+              <tr>
+                <td>{{record.id}}</td>
+                {{#each modelKeys as |key|}}
+                  <td>
+                    {{#link-to 'model-records.edit' recordType record}}
+                      {{get record key}}
+                    {{/link-to}}
+                  </td>
+                {{/each}}
+              </tr>
+            {{/each}}
+          {{else}}
             <tr>
-              <td>{{record.id}}</td>
-              {{#each modelKeys as |key|}}
-                <td>
-                  {{#link-to 'model-records.edit' recordType record}}
-                    {{get record key}}
-                  {{/link-to}}
-                </td>
-              {{/each}}
-            </tr>
-          {{/each}}
+                <td>{{records.id}}</td>
+                {{#each modelKeys as |key|}}
+                  <td>
+                    {{#link-to 'model-records.edit' recordType records}}
+                      {{get records key}}
+                    {{/link-to}}
+                  </td>
+                {{/each}}
+              </tr>
+          {{/if}}
         </tbody>
       </table>
       {{#unless records}}

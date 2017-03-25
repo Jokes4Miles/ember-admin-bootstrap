@@ -51,8 +51,12 @@ export default Ember.Component.extend({
     return this.get('model').get(this.get('relationship').name);
   }),
   modelKeys: Ember.computed('model', function() {
-    if (typeof this.get('model').get(this.get('relationship').name) !== undefined && this.get('model').get(this.get('relationship').name).get('length') > 0)
-      return Object.keys(this.get('model').get(this.get('relationship').name).objectAt(0).toJSON());
+    const relationshipType = this.get('relationship'),
+          recordData = this.get('model').get(this.get('relationship').name);
+    if (typeof recordData !== undefined && recordData.get('length') > 0)
+      return Object.keys(recordData.objectAt(0).toJSON());
+    else if (typeof relationshipType === "object")
+      return Object.keys(recordData.content.toJSON());
     return [];
   }),
   store: Ember.inject.service()
