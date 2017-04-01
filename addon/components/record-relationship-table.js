@@ -55,7 +55,7 @@ export default Ember.Component.extend({
           recordData = this.get('model').get(this.get('relationship').name);
     if (typeof recordData !== undefined && recordData.get('length') > 0)
       return Object.keys(recordData.objectAt(0).toJSON());
-    else if (typeof relationshipType === "object")
+    else if (typeof relationshipType === "object" && recordData.content)
       return Object.keys(recordData.content.toJSON());
     return [];
   }),
